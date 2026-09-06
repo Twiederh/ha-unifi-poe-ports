@@ -65,10 +65,17 @@ class UnifiPoeCoordinator(DataUpdateCoordinator[None]):
         self.last_active_poe_mode: dict[str, str] = {}
 
     async def async_setup(self) -> None:
-        """Login und ersten Datenabruf durchführen."""
+        """Login und ersten Datenabruf durchführen.
+
+        Ruft bewusst nicht Controller.initialize() auf: diese Komfortmethode
+        ist je nach aiounifi-Version nicht (mehr) vorhanden. Stattdessen wird
+        - genau wie in der offiziellen Home-Assistant-UniFi-Integration -
+        nur login() plus ein gezielter devices.update() verwendet; das reicht,
+        um über die interne Ports-Subscription auch alle Port-Daten zu laden.
+        """
         try:
             await self.controller.login()
-            await self.controller.initialize()
+            await self.controller.devices.update()
         except (Unauthorized, LoginRequired) as err:
             raise ConfigEntryAuthFailed("Anmeldung am UniFi-Controller fehlgeschlagen") from err
         except (RequestError, aiohttp.ClientError, TimeoutError) as err:
