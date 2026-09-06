@@ -1,0 +1,25 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Zugangsdaten für deinen UniFi Network-Controller (UniFi-OS-Gerät wie UDM/UDM-Pro/Cloud Gateway oder klassische Network-Controller-Software).",
+        "data": {
+          "host": "Host / IP-Adresse",
+          "port": "Port",
+          "username": "Benutzername",
+          "password": "Passwort",
+          "site": "Site-ID",
+          "verify_ssl": "SSL-Zertifikat prüfen"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Anmeldung fehlgeschlagen. Benutzername oder Passwort prüfen.",
+      "cannot_connect": "Verbindung zum UniFi-Controller nicht möglich.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Dieser Controller/diese Site ist bereits konfiguriert."
+    }
+  }
+}
